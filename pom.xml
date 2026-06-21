@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright The WildFly Authors
+  ~ SPDX-License-Identifier: Apache-2.0
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.jboss</groupId>
+    <artifactId>jboss-parent</artifactId>
+    <version>51</version>
+  </parent>
+
+  <groupId>org.wildfly.plugins</groupId>
+  <artifactId>wildfly-detach-plugin</artifactId>
+  <version>1.0.0.Final-SNAPSHOT</version>
+  <packaging>maven-plugin</packaging>
+
+  <name>WildFly Detach Artifacts Maven Plugin</name>
+  <description>Maven plugin that detaches artifacts from a project during the build</description>
+
+  <url>https://github.com/wildfly/wildfly-detach-plugin</url>
+
+  <licenses>
+      <license>
+          <name>Apache License 2.0</name>
+          <url>http://repository.jboss.org/licenses/apache-2.0.txt</url>
+          <distribution>repo</distribution>
+      </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>wildfly.org</id>
+      <name>WildFly Community</name>
+      <organization>wildfly.org</organization>
+      <organizationUrl>http://wildfly.org</organizationUrl>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git@github.com:wildfly/wildfly-detach-plugin.git</connection>
+    <developerConnection>scm:git:git@github.com:wildfly/wildfly-detach-plugin.git</developerConnection>
+    <url>https://github.com/wildfly/wildfly-detach-plugin</url>
+  </scm>
+
+  <properties>
+
+    <!-- Repository Deployment Settings -->
+    <nexus.repository.staging>wildfly-staging</nexus.repository.staging>
+    <nexus.staging.tag>wildfly-detach-plugin-${project.version}</nexus.staging.tag>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <version.maven>3.9.16</version.maven>
+    <version.mavenPluginTools>3.15.2</version.mavenPluginTools>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-core</artifactId>
+        <version>${version.maven}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.plugin-tools</groupId>
+        <artifactId>maven-plugin-tools-annotations</artifactId>
+        <version>${version.mavenPluginTools}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-core</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.plugin-tools</groupId>
+      <artifactId>maven-plugin-tools-annotations</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-plugin-plugin</artifactId>
+          <version>${version.mavenPluginTools}</version>
+          <configuration>
+            <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
+            <goalPrefix>wildfly-detach</goalPrefix>
+          </configuration>
+          <executions>
+            <execution>
+              <id>mojo-descriptor</id>
+              <phase>process-classes</phase>
+              <goals>
+                <goal>descriptor</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>help-goal</id>
+              <goals>
+                <goal>helpmojo</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+</project>
+
