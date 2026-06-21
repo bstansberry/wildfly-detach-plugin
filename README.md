@@ -4,6 +4,12 @@ Maven plugin that detaches artifacts from a project during the build.
 
 ## Usage
 
+The plugin takes a `regex` parameter that is used to match against the `Artifact.getId()`
+of each artifact attached to the project. 
+The artifact id is a string of the form `groupId:artifactId:type[:classifier]:version`.
+If no matches are found, the plugin will attempt to match against the 
+`Artifact.getFile().getName()` value for each attached artifact.
+
 Here's an example use in a build that earlier used the maven-assembly-plugin
 to produce tar.gz files that are wanted for use elsewhere. But we don't want 
 to install them in the local maven repo or deploy them to a remote repo.
