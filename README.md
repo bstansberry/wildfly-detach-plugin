@@ -22,8 +22,8 @@ us not attach the tars. But we want the maven-gpg-plugin to sign and produce
 <!-- GPG signing is configured elsewhere. Just redeclare the execution here
      so the wildfly-detach-plugin runs after and can detach the asc files -->
 <plugin>
-    <groupId>org.apache.maven.plugins</plugin>
-    <artifactId>maven-gpg-plugin</plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-gpg-plugin</artifactId>
     <executions>
         <execution>
             <id>gpg-sign</id>
@@ -32,13 +32,16 @@ us not attach the tars. But we want the maven-gpg-plugin to sign and produce
     </executions>
 </plugin>
 <plugin>
-    <groupId>org.wildfly.plugins</plugin>
-    <artifactId>wildfly-detach-plugin</plugin>
+    <groupId>org.wildfly.plugins</groupId>
+    <artifactId>wildfly-detach-plugin</artifactId>
     <executions>
         <execution>
             <!-- We built tars for local use but we don't
                  want to install or deploy them. -->
             <id>detach-tars</id>
+            <goals>
+                <goal>detach-artifacts</goal>
+            </goals>
             <phase>verify</phase>
             <configuration>
                 <regex>\S{1,}tar\.gz\S*</regex>
