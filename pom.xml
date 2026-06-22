@@ -16,7 +16,7 @@
 
   <groupId>org.wildfly.plugins</groupId>
   <artifactId>wildfly-detach-plugin</artifactId>
-  <version>1.0.0.Final</version>
+  <version>1.0.1.Final-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
 
   <name>WildFly Detach Artifacts Maven Plugin</name>
