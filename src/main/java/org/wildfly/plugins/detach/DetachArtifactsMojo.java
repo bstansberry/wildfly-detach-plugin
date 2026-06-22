@@ -5,6 +5,7 @@
 
 package org.wildfly.plugins.detach;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -71,7 +72,7 @@ public class DetachArtifactsMojo extends AbstractMojo {
             }
         }
 
-        if (toDetach.isEmpty)) {
+        if (toDetach.isEmpty()) {
             for (Artifact artifact : attachedArtifacts) {
                 File file = artifact.getFile();
                 if (file != null && pattern.matcher(file.getName()).matches()) {
